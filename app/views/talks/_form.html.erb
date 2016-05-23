@@ -11,21 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :speaker_name %><br>
-    <%= f.text_field :speaker_name %>
+    <%= f.text_field :speaker_name, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time %>
+    <%= f.datetime_select :start_time, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :end_time %><br>
-    <%= f.datetime_select :end_time %>
+    <%= f.datetime_select :end_time, class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>
