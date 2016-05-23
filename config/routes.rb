@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  
-  get 'site/home'
+
+  root to: 'site#home'
 
   resources :conferences
   resources :talks
