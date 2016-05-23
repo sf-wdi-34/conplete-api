@@ -11,11 +11,12 @@
 </p>
 
 <%= link_to 'Edit', edit_conference_path(@conference) %> |
-<%= link_to 'Back', conferences_path %>
+<%= link_to 'Back', conferences_path %> |
+<%= link_to 'Add Talk', new_conference_talk_path(@conference) %> |
+<%= link_to "View JSON", {:format => :json } %>
 
-<p><%= link_to 'Add Talk', new_conference_talk_path(@conference) %></p>
 <p>
-  <strong>Talks:</strong>
+  <strong>Talks:</strong> (<%= link_to "details", conference_talks_path(@conference) %>)
   <% @conference.talks.each do |talk| %>
     <p><%= link_to talk.title, conference_talk_path(@conference, talk) %></p>
   <% end %>
