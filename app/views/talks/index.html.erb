@@ -21,7 +21,7 @@
         <td><%= talk.speaker_name %></td>
         <td><%= talk.start_time %></td>
         <td><%= talk.end_time %></td>
-        <td><%= talk.conference %></td>
+        <td><%= talk.conference.name %></td>
         <td><%= link_to 'Show', talk %></td>
         <td><%= link_to 'Edit', edit_talk_path(talk) %></td>
         <td><%= link_to 'Destroy', talk, method: :delete, data: { confirm: 'Are you sure?' } %></td>
