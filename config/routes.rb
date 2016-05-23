@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   
+  get 'site/home'
 
+  resources :conferences
+  resources :talks
 
-  resources :conferences do
-    resources :talks
-  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
