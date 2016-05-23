@@ -1,33 +1,35 @@
 class TalksController < ApplicationController
+  before_action :set_conference
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
-  # GET /talks
-  # GET /talks.json
+  # GET /conference/1/talks
+  # GET /conference/1/talks.json
   def index
-    @talks = Talk.all
+    @talks = @conference.talks
   end
 
-  # GET /talks/1
-  # GET /talks/1.json
+  # GET /conference/1/talks/1
+  # GET /conference/1/talks/1.json
   def show
   end
 
-  # GET /talks/new
+  # GET /conference/1/talks/new
   def new
     @talk = Talk.new
   end
 
-  # GET /talks/1/edit
+  # GET /conference/1/talks/1/edit
   def edit
   end
 
-  # POST /talks
-  # POST /talks.json
+  # POST /conference/1/talks
+  # POST /conference/1/talks.json
   def create
     @talk = Talk.new(talk_params)
 
     respond_to do |format|
       if @talk.save
+        @conference.talks << @talk
         format.html { redirect_to @talk, notice: 'Talk was successfully created.' }
         format.json { render :show, status: :created, location: @talk }
       else
@@ -37,8 +39,8 @@ class TalksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /talks/1
-  # PATCH/PUT /talks/1.json
+  # PATCH/PUT /conference/1/talks/1
+  # PATCH/PUT /conference/1/talks/1.json
   def update
     respond_to do |format|
       if @talk.update(talk_params)
@@ -51,8 +53,8 @@ class TalksController < ApplicationController
     end
   end
 
-  # DELETE /talks/1
-  # DELETE /talks/1.json
+  # DELETE /conference/1/talks/1
+  # DELETE /conference/1/talks/1.json
   def destroy
     @talk.destroy
     respond_to do |format|
@@ -63,9 +65,14 @@ class TalksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_conference
+      @conference = Conference.find(params[:conference_id])
+    end
+
     def set_talk
       @talk = Talk.find(params[:id])
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def talk_params
