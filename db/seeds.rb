@@ -14,22 +14,10 @@ conference_start = 0.days.from_now.at_midnight + 8.hours
 
 talks_data = [
   {
-    title: "Abaci",
-    speaker_name: "Anila",
-    start_offset: 2.hours,
-    duration: 0.5.hours
-  },
-  {
     title: "Branding",
     speaker_name: "Brett",
     start_offset: 3.hours,
     duration: 1.5.hours
-  },
-  {
-    title: "Card Counting",
-    speaker_name: "Cynthia",
-    start_offset: 4.hours,
-    duration: 0.75.hours
   },
   {
     title: "Debugging",
@@ -56,28 +44,10 @@ talks_data = [
     duration: 0.75.hours
   },
   {
-    title: "Henna",
-    speaker_name: "Hannah",
-    start_offset: 1.hours,
-    duration: 1.5.hours
-  },
-  {
     title: "Iteration",
     speaker_name: "Ida",
     start_offset: 0.hours,
     duration: 0.75.hours
-  },
-  {
-    title: "Jaunt",
-    speaker_name: "Juan",
-    start_offset: 0.5.hours,
-    duration: 0.5.hours
-  },
-  {
-    title: "Kingdom",
-    speaker_name: "Kurt",
-    start_offset: 2.hours,
-    duration: 1.hours
   },
   {
     title: "Lunch",
@@ -92,24 +62,6 @@ talks_data = [
     duration: 0.75.hours
   },
   {
-    title: "Natives",
-    speaker_name: "Nedhi",
-    start_offset: 6.5.hours,
-    duration: 1.0.hours
-  },
-  {
-    title: "Opportunities",
-    speaker_name: "Opal",
-    start_offset: 7.hours,
-    duration: 1.hours
-  },
-  {
-    title: "Photobomb",
-    speaker_name: "Pheobe",
-    start_offset: 6.hours,
-    duration: 0.5.hours
-  },
-  {
     title: "Questing",
     speaker_name: "Quintain",
     start_offset: 7.25.hours,
@@ -122,46 +74,10 @@ talks_data = [
     duration: 0.5.hours
   },
   {
-    title: "Streamline",
+    title: "Streams",
     speaker_name: "Sam",
     start_offset: 3.75.hours,
     duration: 1.hours
-  },
-  {
-    title: "Turnover",
-    speaker_name: "Trey",
-    start_offset: 1.5.hours,
-    duration: 1.hours
-  },
-  {
-    title: "Unanimity",
-    speaker_name: "Ugo",
-    start_offset: 4.75.hours,
-    duration: 0.75.hours
-  },
-  {
-    title: "Veritibility",
-    speaker_name: "Van",
-    start_offset: 6.75.hours,
-    duration: 0.75.hours
-  },
-  {
-    title: "War",
-    speaker_name: "Warren",
-    start_offset: 2.5.hours,
-    duration: 0.75.hours
-  },
-  {
-    title: "Xenogenesis",
-    speaker_name: "Xavier",
-    start_offset: 3.5.hours,
-    duration: 1.hours
-  },
-  {
-    title: "Youth",
-    speaker_name: "Yev",
-    start_offset: 1.hours,
-    duration: 0.75.hours
   },
   {
     title: "Zero",
