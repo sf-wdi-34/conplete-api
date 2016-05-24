@@ -12,12 +12,12 @@
 
 <p>
   <strong>Start time:</strong>
-  <%= @talk.start_time %>
+  <%= @talk.start_time.to_formatted_s(:rfc822) %>
 </p>
 
 <p>
   <strong>End time:</strong>
-  <%= @talk.end_time %>
+  <%= @talk.end_time.to_formatted_s(:rfc822) %>
 </p>
 
 <p>

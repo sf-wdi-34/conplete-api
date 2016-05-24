@@ -19,8 +19,8 @@
       <tr>
         <td><%= talk.title %></td>
         <td><%= talk.speaker_name %></td>
-        <td><%= talk.start_time %></td>
-        <td><%= talk.end_time %></td>
+        <td><%= talk.start_time.to_formatted_s(:rfc822) %></td>
+        <td><%= talk.end_time.to_formatted_s(:rfc822) %></td>
         <td><%= talk.conference.name %></td>
         <td><%= link_to 'Show', conference_talk_path(@conference, talk) %></td>
         <td><%= link_to 'Edit', edit_conference_talk_path(@conference, talk) %></td>
