@@ -31,7 +31,7 @@ class TalksController < ApplicationController
       if @talk.save
         @conference.talks << @talk
         format.html { redirect_to conference_talk_path(@conference, @talk), notice: 'Talk was successfully created.' }
-        format.json { render :show, status: :created, location: @talk }
+        format.json { render :show, status: :created, location: conference_talk_url(@conference, @talk) }
       else
         format.html { render :new }
         format.json { render json: @talk.errors, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class TalksController < ApplicationController
     respond_to do |format|
       if @talk.update(talk_params)
         format.html { redirect_to conference_talk_path(@conference, @talk), notice: 'Talk was successfully updated.' }
-        format.json { render :show, status: :ok, location: @talk }
+        format.json { render :show, status: :ok, location: conference_talk_url(@conference, @talk) }
       else
         format.html { render :edit }
         format.json { render json: @talk.errors, status: :unprocessable_entity }
