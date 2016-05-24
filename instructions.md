@@ -26,7 +26,7 @@ For the conference-going completionist.  Conferences have many talks! This app h
 1. Generate a new rails project (called `con-pletionist`).  Skip turoboliks, use a postgres database, and skip Rails' built-in Minitest tests.
 
   <details>
-    <summary>Stuck? Click to see the Terminal app to run.</summary>
+    <summary>Stuck? Click to see the Terminal command to run.</summary>
     In your Terminal, run `rails new con-pletionist --skip-turbolinks --database=postgresql -T`
   </details>  
 
