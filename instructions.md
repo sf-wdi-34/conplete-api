@@ -20,6 +20,9 @@ Meta-goals:
 
 For the conference-going completionist.  Conferences have many talks! This app helps track them. Responds to html and json format requests, with a permissive JSON API.
 
+This repo holds the completed app solution.
+[Link to completed app on heroku.](https://con-pletionist.herokuapp.com)
+
 
 ### Set Up Conferences
 
