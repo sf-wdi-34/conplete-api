@@ -67,7 +67,7 @@ For the conference-going completionist.  Conferences have many talks! This app h
 
 6. The JSON views are using a gem called `jbuilder`, which might have noticed in the file extension `.json.jbuilder`.  Look over the first example input and output in the [`jbuilder` docs](https://github.com/rails/jbuilder) to see some of how `jbuilder` creates structured data.
 
-7. Edit `views/conferences/index.json.jbuilder` to include a field for the url of each conference in the JSON. Use url helpers to generate the correct url for each conference, and set the format of the url to JSON.
+7. Edit `views/conferences/index.json.jbuilder` and `views/conferences/show.json.jbuilder` so that both JSON views include a field for the url of each conference. Use url helpers to generate the correct url for each conference, and set the format of the url to JSON.
 
   <details>
     <summary>Stuck? Click to see suggestions about where to look for more information.</summary>
