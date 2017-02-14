@@ -51,6 +51,18 @@ This repo holds the completed app solution.
     $ rails s
     ```
   </details>
+  
+  <details><summary>click to see `rails routes` output</summary>
+  ```
+          Prefix Verb   URI Pattern                Controller#Action
+   conferences GET    /conferences(.:format)     conferences#index
+               POST   /conferences(.:format)     conferences#create
+    conference GET    /conferences/:id(.:format) conferences#show
+               PATCH  /conferences/:id(.:format) conferences#update
+               PUT    /conferences/:id(.:format) conferences#update
+               DELETE /conferences/:id(.:format) conferences#destroy
+  ```
+  </details>
 
 4.  Once you have your Rails server running, spend 5 minutes interacting with the site. Try all CRUD actions for conferences. Try visiting `/conferences.json`.
 
