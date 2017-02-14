@@ -77,8 +77,14 @@ This repo holds the completed app solution.
   * What are the `format.html` blocks doing?  Which views are they rendering?
 
   * What are the `format.json` blocks doing?  Which views are they rendering?
+  
+
 
   **Next up**: build JSON with `jbuilder`
+  
+  **Comment-in** the jbuilder gem.
+  
+  ** It won't work.  Make sure the format for the routes is processed at JSON.**    **Make sure the format for the routes is processed at JSON**
 
 6. The JSON views are using a gem called `jbuilder`, which might have noticed in the file extension `.json.jbuilder`.  Look over the first example input and output in the [`jbuilder` docs](https://github.com/rails/jbuilder) to see some of how `jbuilder` creates structured data.
 
