@@ -10,7 +10,6 @@ class ConferencesController < ApplicationController
 
   # GET /conferences/1
   def show
-    render json: @conference
   end
 
   # POST /conferences
