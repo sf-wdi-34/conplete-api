@@ -1,5 +1,5 @@
 <!--
-Creator: SF Team (Alex, Travis)
+Creator: SF Team (Alex, Brianna)
 Last edited by: Brianna
 Location: SF
 -->
@@ -58,11 +58,11 @@ This repo holds the completed app solution.
 
 ### Set Up Conferences
 
-1. Generate a new rails project (called `con-pletionist`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
+1. Generate a new rails project (called `con-plete`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
 
   <details>
     <summary>Stuck? Click to see the Terminal command to run.</summary>
-    In your Terminal, run `rails new con-pletionist  --database=postgresql -T --api`
+    In your Terminal, run `rails new con-plete  --database=postgresql -T --api`
   </details>  
 
   **Next up:** explore scaffolding
