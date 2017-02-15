@@ -1,24 +1,7 @@
-# README
+# Conplete API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails 5 JSON API for conferences and talks.  
 
-Things you may want to cover:
+See [https://github.com/sf-wdi-34/rails-5-api](https://github.com/sf-wdi-34/rails-5-api) for README information and tips on how to build. 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Deployed on heroku with endpoints at [https://conplete-api.herokuapp.com/conferences](https://conplete-api.herokuapp.com/conferences) and [https://conplete-api.herokuapp.com/talks](https://conplete-api.herokuapp.com/talks).
