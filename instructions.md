@@ -14,57 +14,66 @@ Meta-goals:
   * Practice finding and using documentation.
   * Practice picking out key words from project descriptions.
   * Explain pros and cons of using code generators.
+  
+  
+You should already be able to:
+
+  * make requests with Postman or `curl`
 
 
 ## Steps to Create the con-pletionist App
 
-For the conference-going completionist.  Conferences have many talks! This app helps track them. Responds to html and json format requests, with a permissive JSON API.
+For the conference-going completionist.  Conferences have many talks! This API helps track them. JSON format requests, with a permissive JSON API.
 
 This repo holds the completed app solution.
+
 [Link to completed app on heroku.](https://con-pletionist.herokuapp.com)
 
 
 ### Set Up Conferences
 
-1. Generate a new rails project (called `con-pletionist`).  Skip turoboliks, use a postgres database, and skip Rails' built-in Minitest tests.
+1. Generate a new rails project (called `con-pletionist`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
 
   <details>
     <summary>Stuck? Click to see the Terminal command to run.</summary>
-    In your Terminal, run `rails new con-pletionist --skip-turbolinks --database=postgresql -T`
+    In your Terminal, run `rails new con-pletionist  --database=postgresql -T --api`
   </details>  
 
   **Next up:** explore scaffolding
 
-2. In your Rails app, generate a [scaffold](http://guides.rubyonrails.org/v3.2.9/getting_started.html#getting-up-and-running-quickly-with-scaffolding) for a `conference` resource that includes the conference's name (a string) and location (also a string, for now). Carefully read the output in the Terminal. Scaffolding generates a **lot** of files.
+2. In your Rails app, generate a [scaffold](http://guides.rubyonrails.org/v3.2.9/getting_started.html#getting-up-and-running-quickly-with-scaffolding) for a `conference` resource that includes the conference's name (a string) and location (also a string, for now). Carefully read the output in the Terminal. Scaffolding generates a **lot** of files when we have a full Rails app, but the number is more managable when you're just building an API.
 
 
   > While scaffolding will get you up and running quickly, the code it generates is unlikely to be a perfect fit for your application. You’ll most probably want to customize the generated code. Many experienced Rails developers avoid scaffolding entirely, preferring to write all or most of their source code from scratch.
   > - [Rails Guides: Getting Started](http://guides.rubyonrails.org/v3.2.9/getting_started.html)
 
-3. Start your server, and rake your routes.
+3. Set up your database, start your server, and run `rails routes`.
 
   <details>
-    <summary>Stuck? Click to see some Terminal commands you'll need to get the server going.</summary>
+    <summary>Stuck? Click to see some Terminal commands you'll want to use to get the server going.</summary>
     ```bash
-    $ rake db:create
-    $ rake db:migrate
-    $ rails s
+    $ rails db:create
+    $ rails db:migrate
+    $ rails server
+    ```
+    
+    in a different tab:
+    ```bash
+    $ rails routes
     ```
   </details>
 
-4.  Once you have your Rails server running, spend 5 minutes interacting with the site. Try all CRUD actions for conferences. Try visiting `/conferences.json`.
+4.  Once you have your Rails server running, spend 10 minutes interacting with the site through Postman. Try all CRUD actions for conferences, using the routes listed in your `rails routes`. Try visiting `localhost:3000/conferences` and `localhost:3000/conferences.json` in your browser.
 
 5. Spend 10 minutes looking through the code Rails generated.  Pay particular attention to `app/controllers/conferences_controller.rb`, and answer the following questions with a partner:
 
-  * In the conferences controller, what does the line `  before_action :set_conference, only: [:show, :edit, :update, :destroy]` do?
+  * In the conferences controller, what does the line `  before_action :set_conference, only: [:show, :update, :destroy]` do?
 
-  * Taking a hint from the generated comments in the conferences controller, visit the `/conferences.json` endpoint in your browser. What do you see?
+  * Taking a hint from the generated comments in the conferences controller, visit the `/conferences` endpoint in your browser. What do you see?
 
-  * In the conferences controller, what are the `respond_to do |format| ... end` blocks for?
-
-  * What are the `format.html` blocks doing?  Which views are they rendering?
-
-  * What are the `format.json` blocks doing?  Which views are they rendering?
+  * In the conferences controller, what is the `conference_params` private method for? What does the `params.fetch(:conference, {})` line do?
+  
+  * Find documentation for the `render` method.  `render` with a hash like `{ json: @conference }` ?
 
   **Next up**: build JSON with `jbuilder`
 
