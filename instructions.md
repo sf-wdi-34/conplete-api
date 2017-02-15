@@ -1,5 +1,6 @@
 <!--
-Creator: SF Team (Alex White)
+Creator: SF Team (Alex, Travis)
+Last edited by: Brianna
 Location: SF
 -->
 
@@ -9,8 +10,9 @@ Location: SF
 
 ### Why is this important?
 *This workshop is important because:*
-- Rails is a powerful JSON API building tool
+- Rails is a powerful tool for building APIs with RESTful routes very quickly
 - API mode is now built in to Rails 5
+
 
 ### What are the objectives?
 <!-- specific/measurable goal for students to achieve -->
@@ -24,48 +26,61 @@ Location: SF
 *Before this workshop, developers should already be able to:*
 
 - Create a Ruby on Rails CRUD app
-- Create an Angular CRUD app using an external API
+- Make requests with Postman or `curl`
+
+
+<!-- - Create an Angular CRUD app using an external API -->
 
 Meta-goals:
 
   * Practice finding and using documentation.
   * Practice picking out key words from project descriptions.
   * Explain pros and cons of using code generators.
+  
+
+## How to use this resource
+
+This lesson is structured as a self-guided lab in which you'll build an API with Rails 5.  It has a series of steps listed that you should take in order. 
+
+There are hints or code snippets with some of the steps.  You'll usually have to click to see them.
+
+Sometimes, you'll find steps that are missing or ambiguous and don't have hints.  You have the skills and resources to figure out these steps yourselves, especially if you work together and share tips with all of your colleagues. 
 
 
-## Steps to Create the con-pletionist App
+## The "Con-plete" API
 
-For the conference-going completionist.  Conferences have many talks! This app helps track them. Responds to html and json format requests, with a permissive JSON API.
+The "con-plete" API aims to give a complete list of talks going on at different conferences.  Conferences have many talks! This API helps track them. It processes requests as JSON request, with a permissive JSON API.
 
 This repo holds the completed app solution.
+
 [Link to completed app on heroku.](https://con-pletionist.herokuapp.com)
 
 
 ### Set Up Conferences
 
-1. Generate a new rails project (called `con-pletionist`).  Skip turoboliks, use a postgres database, and skip Rails' built-in Minitest tests.
+1. Generate a new rails project (called `con-pletionist`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
 
   <details>
     <summary>Stuck? Click to see the Terminal command to run.</summary>
-    In your Terminal, run `rails new con-pletionist --skip-turbolinks --database=postgresql -T`
+    In your Terminal, run `rails new con-pletionist  --database=postgresql -T --api`
   </details>  
 
   **Next up:** explore scaffolding
 
-2. In your Rails app, generate a [scaffold](http://guides.rubyonrails.org/v3.2.9/getting_started.html#getting-up-and-running-quickly-with-scaffolding) for a `conference` resource that includes the conference's name (a string) and location (also a string, for now). Carefully read the output in the Terminal. Scaffolding generates a **lot** of files.
+2. In your Rails app, generate a [scaffold](http://guides.rubyonrails.org/command_line.html#rails-generate) for a `conference` resource that includes the conference's name (a string) and location (also a string, for now). Carefully read the output in the Terminal. Scaffolding generates a **lot** of files when we have a full Rails app, but the number is more managable when you're just building an API.
 
 
   > While scaffolding will get you up and running quickly, the code it generates is unlikely to be a perfect fit for your application. You’ll most probably want to customize the generated code. Many experienced Rails developers avoid scaffolding entirely, preferring to write all or most of their source code from scratch.
-  > - [Rails Guides: Getting Started](http://guides.rubyonrails.org/v3.2.9/getting_started.html)
+  > - [Rails Guides: Getting Started (version 3.2.9)](http://guides.rubyonrails.org/v3.2.9/getting_started.html)
 
-3. Start your server, and rake your routes.
+3. Set up your database, start your server, and run `rails routes`.  Read terminal output carefully starting with the top of any error messages. 
 
   <details>
-    <summary>Stuck? Click to see some Terminal commands you'll need to get the server going.</summary>
+    <summary>Stuck? Click to see some Terminal commands you'll want to use to get the server going.</summary>
     ```bash
-    $ rake db:create
-    $ rake db:migrate
-    $ rails s
+    $ rails db:create
+    $ rails db:migrate
+    $ rails server
     ```
   </details>
   
@@ -81,38 +96,45 @@ This repo holds the completed app solution.
   ```
   </details>
 
-4.  Once you have your Rails server running, spend 5 minutes interacting with the site. Try all CRUD actions for conferences. Try visiting `/conferences.json`.
+4.  Once you have your Rails server running, spend 10 minutes interacting with the site through Postman. Try all CRUD actions for conferences, using the routes listed in your `rails routes`. 
 
 5. Spend 10 minutes looking through the code Rails generated.  Pay particular attention to `app/controllers/conferences_controller.rb`, and answer the following questions with a partner:
 
-  * In the conferences controller, what does the line `  before_action :set_conference, only: [:show, :edit, :update, :destroy]` do?
+  * In the conferences controller, what does the line `  before_action :set_conference, only: [:show, :update, :destroy]` do?
 
-  * Taking a hint from the generated comments in the conferences controller, visit the `/conferences.json` endpoint in your browser. What do you see?
+  * Taking a hint from the generated comments in the conferences controller, visit the `/conferences` endpoint in your browser. What do you see?
 
-  * In the conferences controller, what are the `respond_to do |format| ... end` blocks for?
 
-  * What are the `format.html` blocks doing?  Which views are they rendering?
-
-  * What are the `format.json` blocks doing?  Which views are they rendering?
+  * In the conferences controller, what is the `conference_params` private method for? What does the `params.fetch(:conference, {})` line do?
   
+  * Note that the  `render` line with a hash like `{ json: @conferences }`  is rendering `@conferences` very directly to JSON. If we want something more complex, we can use a gem called `jbuilder`. 
 
-
-  **Next up**: build JSON with `jbuilder`
+  **Next up**: build better JSON with `jbuilder`
   
-  **Comment-in** the jbuilder gem.
-  
-  ** It won't work.  Make sure the format for the routes is processed at JSON.**    **Make sure the format for the routes is processed at JSON**
+6. In the Gemfile, add the gem `jbuilder`. 
 
-6. The JSON views are using a gem called `jbuilder`, which might have noticed in the file extension `.json.jbuilder`.  Look over the first example input and output in the [`jbuilder` docs](https://github.com/rails/jbuilder) to see some of how `jbuilder` creates structured data.
+  <details><summary>did you remember to...</summary> bundle?</details>
 
-7. Edit `views/conferences/index.json.jbuilder` and/or `views/conferences/show.json.jbuilder` so that both JSON views include a field for the url of each conference. Use url helpers to generate the correct url for each conference, and set the format of the url to JSON. Hint: start by looking at each of these files. 
+7. Change the conference routes to use a default format of JSON.
+
+8. In the conferences controller `show` method, remove the line that says `render json: @conference` so that it doesn't directly render JSON. What kind of error do you get if you visit the url for a single conference in your browser? (Make sure you're trying to access a conference that does exist in your database.) 
+
+9. Create a `jbuilder` template for the show view: `views/conferences/show.json.jbuilder`.  Inside this file, add a line that says `json.name @name`.  What do you see in if you visit a conference show page now?  
+
+10. Modify the template so that the conference's `location` is also included. 
+
+10. Look over the first example input and output in the [`jbuilder` docs](https://github.com/rails/jbuilder) to see more examples of how `jbuilder` creates structured data. 
+
+7. Edit `views/conferences/show.json.jbuilder` so that it includes a field for the url of the conference (like you've been visiting in your browser). Use url helpers to generate the correct url for each conference, and set the format of the url to JSON. Hint: you'll use `url_for` or `conference_path`. 
 
   <details>
     <summary>Stuck? Click to see suggestions about where to look for more information.</summary>
     * search for "Rails url helper"
     * search for "Rails url helper JSON format"
-    * revisit the example in the `jbuilder` documentation
+    * revisit the example in the `jbuilder` documentation, and look for urls
   </details>
+
+8. Create a view for the index of conferences. This view should result in an array of conferences, each with the `name`, `location`, and direct link `url`. Hint: 'json.array!'.
 
 ### Incorporate Talks
 
@@ -127,7 +149,9 @@ This repo holds the completed app solution.
     ```
   </details>
 
-9. Get your rails server running again with talks, and spend 2-5 minutes using the site. Try CRUD operations on talks.
+9. Take a look at the files that were generated for you this time.  Now that `jbuilder` is installed, you should see some JSON templates generated for you. 
+
+9. Get your rails server running again with talks, and spend 2-5 minutes using the API through your browser, Postman, or `curl`. Try CRUD operations on talks.
 
   **Next up**: solidify the association
 
@@ -136,16 +160,18 @@ This repo holds the completed app solution.
 11. Wait to make changes, but explore the following files or directories and see how or if the association is reflected in each. When you're finished with a file or directory, click the file or directory name to compare notes.
 
   * <details><summary>views/talks/</summary>
-    form partial includes a conference id (and a cool datetime form element!); show and index html templates display the conference; show and index JSON templates include the conference id</details>
+    show and index JSON templates include the conference id</details>
   * <details><summary>config/routes.rb</summary> routes for talks and conferences are both included, but talks aren't nested in conferences </details>
   * <details><summary>app/controllers/talks_controller.rb</summary> the conference id is brought in as a permitted parameter in `talk_params` </details>
   * <details><summary>app/models/talk.rb</summary> `belongs_to :conference` is set up! </details>
-  * <details><summary>app/models/conference.rb</summary> the association is incomplete on this side; you'll add `has_many :talks` here </details>
-  * <details><summary>db/migrate/</summary> there's a new migration file to create the talks table, and it includes a `t.belongs_to` for the conference foreign key </details>
+  * <details><summary>app/models/conference.rb</summary> the association is not set up on this side; you'll add `has_many :talks` here </details>
+  * <details><summary>db/migrate/</summary> there's a new migration file to create the talks table, and it includes a `t.belongs_to` or `t.references` for the conference foreign key </details>
   * <details><summary>db/schema.rb</summary> since you had to run `rake db:migrate` to get talks working, there should be a talks table here with the foreign key set up </details>
 
 
-12. Create a one-to-many association by coding the fact that a conference has many talks into your conference model. Also make sure that a conference's talks are destroyed when the conference is destroyed.  Why do you suppose the scaffold left out the `has_many` code? Discuss with others until you're satisfied with an answer.
+12. Create a one-to-many association by coding the fact that a conference has many talks into your conference model. Also make sure that a conference's talks are destroyed when the conference is destroyed.  
+
+13. Your `rails generate scaffold` command clearly showed that each talk references (or belongs to) one conference.  Why do you suppose the scaffold didn't add `has_many :talks` to the conference model code? Discuss with others until you're satisfied with an answer.
 
   **Next up:** more complex custom jbuilder view
 
@@ -164,9 +190,10 @@ This repo holds the completed app solution.
 
 15. Seed your database, and run through your app to confirm that your JSON views are working as expected.
 
-**Note:** At this point, with JSON view templates and routes, use Angular on the front end instead.  (Details coming soon!)  For now, though, we'll move in a different direction and allow any front end to access the API.
+**Note:** At this point, with JSON view templates and routes, we are basically set up to use Angular on the front end.  We could add Angular directly to this project, but for now, we'll allow any front end to access the API instead.
 
-### Open your API
+
+### Share your API
 
 **Note:** Rails generally assumes that only the Rails front-end will be consuming the data stored in the Rails project database. The API of this site will be open to other requesters, though. In fact, we'll open it up to any request origin that wants to use or change the data here.
 
@@ -200,28 +227,13 @@ This repo holds the completed app solution.
 
   **Next up:** configure CORS headers with `rack-cors`
 
-21. Cross-Origin Resource Sharing (CORS) is a standard for sharing resources across domains. The gem `rack-cors` can help configure Rails apps to use CORS. Follow the [`rack-cors` documentation](https://github.com/cyu/rack-cors) to add this gem to your project and configure it.  Use the Rails 4 example linked from that documentation.
+21. Cross-Origin Resource Sharing (CORS) is a standard for sharing resources across domains. The gem `rack-cors` can help configure Rails apps to use CORS. Un-comment [`rack-cors`](https://github.com/cyu/rack-cors) in your Gemfile to add this gem to your project.  You'll also need to change your `config/applciation.rb` -- use the [Rails 5 example code](https://github.com/cyu/rack-cors#rails-configuration) from the documentation.
 
 22. Try your `cURL` commands again. All of them should be successful!
 
 
 
 ## Extra Challenge Ideas
-
-These bonus challenge ideas are not closely related to the fundamentals of this lesson. Please skim over them and feel free to attempt any you find interesting.
-
-### Miscellaneous User Experience Improvements
-
-Clean up this site's dismal front end.  Slightly less dismal solution provided.
-
-1. Add bootstrap css to the site, and make the following minor changes in views:
-  * apply appropriate bootstrap classes to tables
-  * apply appropriate bootstrap classes to forms
-  * put the content on each page into a container
-
-2. Modify HTML views so that instead of `#<Conference:0x007fa49430bc78>` or `#<Talk:0x007359ab3e2391>` the user sees the conference name or talk title.
-
-3. Format the displayed times on your site so they're easier to read.
 
 
 ### HATEOAS
@@ -230,7 +242,7 @@ Level up knowledge of REST with some research, and practice `jbuilder`. Solution
 
 1. HATEOAS, like RESTful routing, is a part of the REST convention. HATEOAS makes it easy to discover resources on a site.  It's less frequently used than RESTful routing but still very common.
 
-2. Update your JSON views to include links implementing (or approaching) HATEOAS.  
+2. Update your JSON views to include more links, implementing (or approaching) HATEOAS.  
 
 
 ### Nest Talk Routes in Conferences
@@ -239,22 +251,17 @@ More conventional treatment of dependent resource, talks.  Solution provided.
 
 This bonus involves changing many files throughout the app. It will be time-consuming. If you choose to work on it, start a new branch. Consider changing over routes one or two at a time instead of doing them all at once.
 
-1. Nest the talk routes inside conference routes, and `rake routes`.
+1. Use shallow nesting to nest the talk routes inside conference routes, and run `rails routes`.
 
   ```ruby
-  resources :conferences do
-    resources :talks
+  resources :conferences except: [:new, :edit] do
+    resources :talks, only: [:index, :create] 
   end
+  resources :talks, only: [:show, :update, :destroy]
   ```
-
-2. Update the `talks` form partial so it no longer takes in a conference id.
-
-3. Update the `talks` html views to take the new routes, paths, and urls into account.
 
 4. Update the `talks` JSON views to take the new routes, paths, and urls into account.
 
 2. Update your talks controller to take the new route structure into account (by looking up the conference for actions that need it).  Make sure actions are modifying the conference if needed, too.
 
-3. Update your talks controller html format responses to reflect the change in routes.
-
-4. Update your talks controller JSON format responses to reflect the change in routes.
+4. Update your talks controller JSON responses to reflect the change in routes.
