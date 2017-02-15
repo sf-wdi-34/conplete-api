@@ -48,22 +48,22 @@ Meta-goals:
   * Explain pros and cons of using code generators.
   
 
-## The "Con-plete" API
+## The "Conplete" API
 
-The "con-plete" API aims to give a complete list of talks going on at different conferences.  Conferences have many talks! This API helps track them. It processes requests as JSON request, with a permissive JSON API.
+The "conplete" API aims to give a complete list of talks going on at different conferences.  Conferences have many talks! This API helps track them. It processes requests as JSON request, with a permissive JSON API.
 
-The `con-plete-solution` directory has a sample app. 
+The `conplete_solution` directory has a sample app. 
 
 [Link to completed app on heroku.](https://con-pletionist.herokuapp.com)
 
 
 ### Set Up Conferences
 
-1. Generate a new rails project (called `con-plete`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
+1. Generate a new rails project (called `conplete`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
 
   <details>
     <summary>Stuck? Click to see the Terminal command to run.</summary>
-    In your Terminal, run `rails new con-plete  --database=postgresql -T --api`
+    In your Terminal, run `rails new conplete  --database=postgresql -T --api`
   </details>  
 
   **Next up:** explore scaffolding
