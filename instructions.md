@@ -31,12 +31,6 @@ Location: SF
 
 <!-- - Create an Angular CRUD app using an external API -->
 
-Meta-goals:
-
-  * Practice finding and using documentation.
-  * Practice picking out key words from project descriptions.
-  * Explain pros and cons of using code generators.
-  
 
 ## How to use this resource
 
@@ -47,11 +41,18 @@ There are hints or code snippets with some of the steps.  You'll usually have to
 Sometimes, you'll find steps that are missing or ambiguous and don't have hints.  You have the skills and resources to figure out these steps yourselves, especially if you work together and share tips with all of your colleagues. 
 
 
+Meta-goals:
+
+  * Practice finding and using documentation.
+  * Practice picking out key words from project descriptions.
+  * Explain pros and cons of using code generators.
+  
+
 ## The "Con-plete" API
 
 The "con-plete" API aims to give a complete list of talks going on at different conferences.  Conferences have many talks! This API helps track them. It processes requests as JSON request, with a permissive JSON API.
 
-This repo holds the completed app solution.
+The `con-plete-solution` directory has a sample app. 
 
 [Link to completed app on heroku.](https://con-pletionist.herokuapp.com)
 
