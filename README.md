@@ -31,12 +31,6 @@ Location: SF
 
 <!-- - Create an Angular CRUD app using an external API -->
 
-Meta-goals:
-
-  * Practice finding and using documentation.
-  * Practice picking out key words from project descriptions.
-  * Explain pros and cons of using code generators.
-  
 
 ## How to use this resource
 
@@ -47,22 +41,29 @@ There are hints or code snippets with some of the steps.  You'll usually have to
 Sometimes, you'll find steps that are missing or ambiguous and don't have hints.  You have the skills and resources to figure out these steps yourselves, especially if you work together and share tips with all of your colleagues. 
 
 
-## The "Con-plete" API
+Meta-goals:
 
-The "con-plete" API aims to give a complete list of talks going on at different conferences.  Conferences have many talks! This API helps track them. It processes requests as JSON request, with a permissive JSON API.
+  * Practice finding and using documentation.
+  * Practice picking out key words from project descriptions.
+  * Explain pros and cons of using code generators.
+  
 
-This repo holds the completed app solution.
+## The "Conplete" API
+
+The "conplete" API aims to give a complete list of talks going on at different conferences.  Conferences have many talks! This API helps track them. It processes requests as JSON request, with a permissive JSON API.
+
+The `conplete_solution` directory has a sample app. 
 
 [Link to completed app on heroku.](https://con-pletionist.herokuapp.com)
 
 
 ### Set Up Conferences
 
-1. Generate a new rails project (called `con-plete`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
+1. Generate a new rails project (called `conplete`).  Use a postgres database, skip Rails' built-in Minitest tests, and use the `--api` option to let Rails know your app should be set up as just a back-end API.
 
   <details>
     <summary>Stuck? Click to see the Terminal command to run.</summary>
-    In your Terminal, run `rails new con-plete  --database=postgresql -T --api`
+    In your Terminal, run `rails new conplete  --database=postgresql -T --api`
   </details>  
 
   **Next up:** explore scaffolding
@@ -96,36 +97,39 @@ This repo holds the completed app solution.
   ```
   </details>
 
-4.  Once you have your Rails server running, spend 10 minutes interacting with the site through Postman. Try all CRUD actions for conferences, using the routes listed in your `rails routes`. 
+4.  Once you have your Rails server running, spend 5-10 minutes interacting with the site through Postman or `curl`. Try all CRUD actions for conferences, using the routes listed in your `rails routes`. Either through a `POST` request or through the Rails console, create at least one conference. 
 
 5. Spend 10 minutes looking through the code Rails generated.  Pay particular attention to `app/controllers/conferences_controller.rb`, and answer the following questions with a partner:
 
   * In the conferences controller, what does the line `  before_action :set_conference, only: [:show, :update, :destroy]` do?
 
-  * Taking a hint from the generated comments in the conferences controller, visit the `/conferences` endpoint in your browser. What do you see?
-
-
-  * In the conferences controller, what is the `conference_params` private method for? What does the `params.fetch(:conference, {})` line do?
+  * In the conferences controller, what is the `conference_params` private method for?
   
-  * Note that the  `render` line with a hash like `{ json: @conferences }`  is rendering `@conferences` very directly to JSON. If we want something more complex, we can use a gem called `jbuilder`. 
+  * Taking a hint from the generated comments in the conferences controller, visit the `/conferences` endpoint in your browser. What do you see? Note that the `render` line with a hash like `{ json: @conferences }`  is rendering `@conferences` very directly to JSON. If we want something more complex, we can use a gem called `jbuilder`. 
 
   **Next up**: build better JSON with `jbuilder`
   
-6. In the Gemfile, add the gem `jbuilder`. 
+6. In the Gemfile, add the gem `jbuilder`. Hint: it's already included for Rails 5, but it's commented out. 
+
+  
+6. Confirm that your server still runs. 
+
 
   <details><summary>did you remember to...</summary> bundle?</details>
 
-7. Change the conference routes to use a default format of JSON.
 
-8. In the conferences controller `show` method, remove the line that says `render json: @conference` so that it doesn't directly render JSON. What kind of error do you get if you visit the url for a single conference in your browser? (Make sure you're trying to access a conference that does exist in your database.) 
+7. In the conferences controller `show` method, remove the line that says `render json: @conference` so that it doesn't directly render JSON. What kind of error do you get if you visit the url for a single conference in your browser? (Make sure you're trying to access a conference that does exist in your database.) 
 
-9. Create a `jbuilder` template for the show view: `views/conferences/show.json.jbuilder`.  Inside this file, add a line that says `json.name @name`.  What do you see in if you visit a conference show page now?  
+
+9. Instead of HTML, change the conference routes to use a default format of JSON. 
+
+8. Create a `jbuilder` template for the show view: `views/conferences/show.json.jbuilder`.  Inside this file, add a line that says `json.name @conference.name`.  What do you see in if you visit a conference show page now?  
 
 10. Modify the template so that the conference's `location` is also included. 
 
 10. Look over the first example input and output in the [`jbuilder` docs](https://github.com/rails/jbuilder) to see more examples of how `jbuilder` creates structured data. 
 
-7. Edit `views/conferences/show.json.jbuilder` so that it includes a field for the url of the conference (like you've been visiting in your browser). Use url helpers to generate the correct url for each conference, and set the format of the url to JSON. Hint: you'll use `url_for` or `conference_path`. 
+7. Edit `views/conferences/show.json.jbuilder` so that it includes a field for the url of the conference (like you've been visiting in your browser). Use url helpers to generate the correct url (or at least path) for each conference, and set the format of the url to JSON. 
 
   <details>
     <summary>Stuck? Click to see suggestions about where to look for more information.</summary>
@@ -134,7 +138,7 @@ This repo holds the completed app solution.
     * revisit the example in the `jbuilder` documentation, and look for urls
   </details>
 
-8. Create a view for the index of conferences. This view should result in an array of conferences, each with the `name`, `location`, and direct link `url`. Hint: 'json.array!'.
+8. Create a view for the index of conferences, and update the conferences controller `index` method so that it renders the `jbuilder` template. This view should be an array of conferences, each with the `name`, `location`, and direct link `url`. Hint: 'json.array!'.
 
 ### Incorporate Talks
 
@@ -149,15 +153,17 @@ This repo holds the completed app solution.
     ```
   </details>
 
-9. Take a look at the files that were generated for you this time.  Now that `jbuilder` is installed, you should see some JSON templates generated for you. 
+9. Spend 2-5 minutes studying the files that were generated for you this time.  Now that `jbuilder` is installed, you should see some JSON templates generated for you. Compare what you wrote for conferences to what the generator wrote for talks, and pick at least one thing to improve in your conference `jbuilder` template(s). 
 
-9. Get your rails server running again with talks, and spend 2-5 minutes using the API through your browser, Postman, or `curl`. Try CRUD operations on talks.
+9. Get your Rails server running again with talks so that you can make a GET request for `/talks`.  Hint: remember to update the default route format to JSON.
+
+1. Spend 2-5 minutes using the API for talks through your browser, Postman, or `curl`. Try CRUD operations on talks.
 
   **Next up**: solidify the association
 
 10. Look at the list of files Rails generated or updated. Where would you expect to see the association between conferences and talks reflected?
 
-11. Wait to make changes, but explore the following files or directories and see how or if the association is reflected in each. When you're finished with a file or directory, click the file or directory name to compare notes.
+11. Don't make code changes yet, but explore the following files or directories and see how or if the association is reflected in each. When you're finished with a file or directory, click the file or directory name to compare notes.
 
   * <details><summary>views/talks/</summary>
     show and index JSON templates include the conference id</details>
@@ -177,9 +183,23 @@ This repo holds the completed app solution.
 
 13. Update the JSON show view for single conferences so that conference JSON lists all of the conference's talks in an embedded array.  Each talk should include a url link to its individual JSON page, but they don't need to include times they were created or updated.
 
-  **Next up:** seeds!
+  <details><summary>Stuck? click for an idea for talks array code</summary>
+  ```ruby
+  json.talks do
+    json.array!(@conference.talks) do |talk|
+      json.title talk.title
+      json.speaker_name talk.speaker_name
+      json.start_time talk.start_time
+      json.end_time talk.ent_time
+      json.url talk_url(talk, format: :json)
+    end
+  end
+  ```
+  </details>
 
-14. Add seed data to your project to create at least 2 conferences and 5 talks. Test your CRUD methods in the Rails console.
+  **Next up:** test with seeds!
+
+14. Add seed data to your project to create at least 2 conferences and 5 talks. If you have any doubt about your seeds, you can try your CRUD methods in the Rails console.
 
   <details><summary>Click for tips for seeding times in Rails.</summary>
     * you can use `Time.current` to get a time with time zone information (the default time zone is UTC)
@@ -203,7 +223,7 @@ This repo holds the completed app solution.
   * `POST /talks`
   * `DELETE /talks/:id` (for some id you know exists on your site)
 
-  <details><summary>Click for suggestions about where to find out how to do this!</summary>
+  <details><summary>Click for suggestions{ about where to find out how to do this!</summary>
   * search "curl json format rails"
   </details>
 
